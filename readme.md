@@ -10,3 +10,6 @@ Pour lancer l'application, il faut executer dans 2 terminaux de commandes à la 
 java -jar server.jar
 java -jar client.jar
 ```
+
+Delaire Jules
+Maillard Guillaume
