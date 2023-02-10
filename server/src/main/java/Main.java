@@ -1,16 +1,22 @@
 import database.Database;
 import socketServer.SocketServer;
+import socketServer.SocketServerManager;
 
+/*
+* Main class
+* */
 public class Main {
 
     public static void main(String[] args) {
+
+        // on instancie les classes nécéssaires
         Database database = new Database();
-        SocketServer socketServer = new SocketServer();
-        socketServer.printInputStream();
+        SocketServerManager socketServerManager = new SocketServerManager(new SocketServer(), database);
 
-        socketServer.closeSocketServer();
-        database.close();
+        while (socketServerManager.isRunning) {
+            socketServerManager.manageRequest(); // on delegue la logique du serveur dans son manager
+        }
 
+        database.close(); // fermeture de la connexion avec la bdd
     }
-
 }

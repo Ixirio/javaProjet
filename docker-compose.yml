@@ -4,14 +4,28 @@ services:
   database:
     image: mysql:5.7
     environment:
-      MYSQL_DATABASE: mabd
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: majavabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
       MYSQL_ROOT_PASSWORD: root
     ports:
       - 3306:3306
     volumes:
       - db:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    links:
+      - database
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: database
+      PMA_PORT: 3306
+      PMA_USER: user
+      PMA_PASSWORD: user
+    ports:
+      - 8081:80
+
 
 volumes:
   db:
